@@ -22,6 +22,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          dockerfile: ./Docker_Homework_02/Dockerfile
+          file: ./Docker_Homework_02/Dockerfile
           push: true
           tags: georgiyovchev/github-actions
