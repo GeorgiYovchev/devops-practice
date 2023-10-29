@@ -21,6 +21,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: Docker_Homework_02/Dockerfile
+          context: ./Docker_Homework_02/Dockerfile
           push: true
           tags: georgiyovchev/github-actions
