@@ -24,4 +24,4 @@ jobs:
           context: .
           file: ./Docker_Homework_02/Dockerfile
           push: true
-          tags: georgiyovchev/github-actions
+          tags: georgiyovchev/github-actions:v0.1
