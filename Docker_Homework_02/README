@@ -1,9 +1,0 @@
-1. Create an index.html file.
-
-2. Create a Dockerfile that is based on nginx:1.20-alpine
-
-3. Copy the index.html file to the new nginx container
-
-4. Create a public image repository in docker hub - georgiyovchev/github-actions
-
-5. Create a GitHub Actions workflow that builds the container and uploads the image to the repository
