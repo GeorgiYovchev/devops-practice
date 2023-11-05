@@ -16,7 +16,6 @@
       source: build
       build:
         path: "{{ code_directory }}"
-        pull: yes
         args:
           listen_port: "{{ listen_port }}"
 
@@ -37,5 +36,6 @@
       name: my_python_app
       image: "{{ image_name }}:{{ image_tag }}"
       ports:
-        - 5000:5000
+        - "{{ mapped_port }}:{{ listen_port }}"
+
 
