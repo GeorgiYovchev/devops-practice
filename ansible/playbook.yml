@@ -1,0 +1,17 @@
+- hosts: localhost
+  gather_facts: no
+  become: no
+
+  vars:
+    image_name: "georgiyovchev/devops-programme-ans"
+    image_tag: "beta"
+    listen_port: 5000
+    repo_name: "georgiyovchev/devops-practice"
+    branch_name: "main"
+    docker_repo: "georgiyovchev/my-python-app"
+
+  vars_files:
+    - secrets.yml
+  
+  roles:
+   - role: roles/app
