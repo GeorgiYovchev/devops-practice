@@ -1,0 +1,9 @@
+1. Created an index.html file.
+
+2. Created a Dockerfile that is based on nginx:1.20-alpine
+
+3. Copying the index.html file to the new nginx container
+
+4. Created a public image repository in docker hub - georgiyovchev/github-actions
+
+5. Created a GitHub Actions workflow that builds the container and uploads the image to the repository
