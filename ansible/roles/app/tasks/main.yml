@@ -37,5 +37,7 @@
       image: "{{ image_name }}:{{ image_tag }}"
       ports:
         - "{{ mapped_port }}:{{ listen_port }}"
+      env:
+        PORT: "{{ listen_port }}"
 
 
