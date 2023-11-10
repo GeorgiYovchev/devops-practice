@@ -1,0 +1,42 @@
+---
+  - name: Create code directory
+    file:
+      dest: "{{ code_directory }}"
+      state: directory
+
+  - name: Get the code from GitHub
+    git:
+      repo: git@github.com:{{ repo_name }}
+      version: "{{ branch_name }}"
+      dest: "{{ code_directory }}"
+
+  - name: Build an image from Dockerfile
+    community.docker.docker_image:
+      name: "{{ image_name }}:{{ image_tag }}"
+      source: build
+      build:
+        path: "{{ code_directory }}"
+        args:
+          listen_port: "{{ listen_port }}"
+
+  - name: Log into Docker Hub
+    community.docker.docker_login:
+      username: "{{ dockerhub_username }}"
+      password: "{{ dockerhub_password }}"
+
+  - name: Push the image to Dockerhub repo
+    community.docker.docker_image:
+      name: "{{ image_name }}:{{ image_tag }}"
+      push: true
+      repository: "{{ docker_repo }}"
+      source: local
+
+  - name: Run the Docker container and map port 5000
+    docker_container:
+      name: my_python_app
+      image: "{{ image_name }}:{{ image_tag }}"
+      ports:
+        - "{{ mapped_port }}:{{ listen_port }}"
+      env:
+        PORT: "{{ listen_port }}"
+
