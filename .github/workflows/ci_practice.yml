@@ -31,14 +31,24 @@ jobs:
         with:
           black: true
           pylint: true
-    
+
       - name: markdownlint-cli
         uses: nosborn/github-action-markdown-cli@v3.3.0
-        with: 
+        with:
           files: README.md
 
-  tests:
-    name: unit-test
-     - name: Run tests
-        working-directory: ./app
-        run: python -m unittest app_test.py
+    tests:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-python@v4
+          with:
+            python-version: 3.8
+
+        - name: Install requirements
+          working-directory: ./app
+          run: python -m pip install -r requirements.txt
+
+        - name: Unit Test
+          working-directory: ./app
+          run: python -m unittest app_test.py
