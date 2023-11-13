@@ -10,7 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: editorconfig-checker/action-editorconfig-checker@main
-    run: editorconfig-checker 
 
   linters:
     name: Run Python linters
@@ -33,5 +32,9 @@ jobs:
         with:
           black: true
           pylint: true
-
-  
+    
+      - name: markdownlint-cli
+        uses: nosborn/github-action-markdown-cli@v3.3.0
+        with: 
+          files: README.md
+          
