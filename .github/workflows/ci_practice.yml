@@ -3,3 +3,11 @@ name: This is the Game
 on:
   push:
     branches: ['github-actions']
+
+jobs:
+  editorconfig:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: editorconfig-checker/action-editorconfig-checker@main
+      - run: editorconfig-checker
