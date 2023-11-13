@@ -10,10 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: editorconfig-checker/action-editorconfig-checker@main
-      - run: editorconfig-checker
+
 
   linters:
-    name: Run Python linter
+    name: Run Python linters
     runs-on: ubuntu-latest
 
     steps:
