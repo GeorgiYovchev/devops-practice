@@ -8,7 +8,6 @@ jobs:
   editorconfig:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - uses: editorconfig-checker/action-editorconfig-checker@main
 
   linters:
@@ -37,4 +36,9 @@ jobs:
         uses: nosborn/github-action-markdown-cli@v3.3.0
         with: 
           files: README.md
-          
+
+  tests:
+    name: unit-test
+     - name: Run tests
+        working-directory: ./app
+        run: python -m unittest app_test.py
