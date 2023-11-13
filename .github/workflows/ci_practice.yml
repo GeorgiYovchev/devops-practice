@@ -26,4 +26,10 @@ jobs:
           python-version: 3.8
 
       - name: Install Python dependencis
-        run: pip install black flake8
+        run: pip install black pylint
+
+      - name: Run the linters
+        uses: wearerequired/lint-action@v2
+        with:
+          black: true
+          pylint: true
