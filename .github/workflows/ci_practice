@@ -1,5 +1,0 @@
-name: This is the Game
-
-on:
-  push:
-    branches: ['github-actions']
