@@ -1,0 +1,33 @@
+name: This is the Game
+on:
+  push:
+    branches: ['github-actions']
+
+jobs:
+
+ editorconfig:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: editorconfig-checker/action-editorconfig-checker@main
+      - run: editorconfig-checker
+    
+    linters:
+    name: Run Python linter
+     steps:
+      - name: Check out GitHub Repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Install Python dependencies
+        run: pip install black flake8
+
+      - name: Run the linters
+        uses: wearerequired/lint-action@v2
+        with:
+          black: true
+          flake8: true
