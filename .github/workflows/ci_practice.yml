@@ -11,3 +11,19 @@ jobs:
       - uses: actions/checkout@v2
       - uses: editorconfig-checker/action-editorconfig-checker@main
       - run: editorconfig-checker
+
+  linters:
+    name: Run Python linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out GitHub Repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Install Python dependencis
+        run: pip install black flake8
