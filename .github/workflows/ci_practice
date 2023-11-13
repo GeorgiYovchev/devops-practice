@@ -12,7 +12,7 @@ jobs:
       - uses: editorconfig-checker/action-editorconfig-checker@main
       - run: editorconfig-checker
     
-    linters:
+ linters:
     name: Run Python linter
      steps:
       - name: Check out GitHub Repo
