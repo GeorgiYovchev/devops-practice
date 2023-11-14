@@ -2,14 +2,12 @@ name: CI Pipeline on PR
 
 on:
   pull_request:
-    types: 
-      - opened
-      - reopened
+  push:
     branches:
       - main
-      
+
     paths:
-      - '**.py'
+      - "**.py"
       - Dockerfile
 
 jobs:
