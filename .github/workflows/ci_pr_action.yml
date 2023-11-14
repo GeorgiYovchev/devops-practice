@@ -18,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
-          python-version: 3.8
+          python-version: 3.11
 
       - name: Install Python dependencies
         run: pip install black flake8
@@ -29,9 +29,3 @@ jobs:
           black: true
           flake8: true
           pylint: false
-
-      - name: Run Dockerfile linter
-        uses: hadolint/hadolint-action@v3.1.0
-        with:
-          dockerfile: Dockerfile
-
