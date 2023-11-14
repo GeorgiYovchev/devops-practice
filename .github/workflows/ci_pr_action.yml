@@ -11,21 +11,24 @@ jobs:
     name: Run linters
     runs-on: ubuntu-latest
 
+    flake8-lint:
+      runs-on: ubuntu-latest
+      name: Lint
+
     steps:
-      - name: Check out Git repository
+      - name: Check out source repository
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v1
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.11
+          python-version: "3.11"
 
-      - name: Install Python dependencies
-        run: pip install black flake8
+      - name: flake8 Lint
+        uses: py-actions/flake8@v2
 
-      - name: Run linters
-        uses: wearerequired/lint-action@v2
+      - name: Run Dockerfile linter
+        uses: hadolint/hadolint-action@v3.1.0
         with:
-          black: true
-          flake8: true
-          pylint: false
+          dockerfile: Dockerfile
+
