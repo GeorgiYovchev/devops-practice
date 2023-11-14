@@ -1,37 +1,32 @@
-name: CI Pipeline on PR
+name: CI PR Pipeline
 
 on:
   pull_request:
-  push:
-    branches:
-      - main
-
-    paths:
-      - "**.py"
-      - Dockerfile
+    types: [opened, reopened]
+    paths: ["**.py", "Dockerfile"]
 
 jobs:
   run-linters:
-    name: Run Python linter
+    name: Run linters
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out GitHub Repo
+      - name: Check out Git repository
         uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
-          python-version: 3.8
+          python-version: 3.11
 
       - name: Install Python dependencies
         run: pip install black flake8
 
-      - name: Run the linters
+      - name: Run linters
         uses: wearerequired/lint-action@v2
         with:
           black: true
-          pylint: true
+          flake8: true
 
       - name: Run Dockerfile linter
         uses: hadolint/hadolint-action@v3.1.0
