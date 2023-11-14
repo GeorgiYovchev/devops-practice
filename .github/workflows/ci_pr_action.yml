@@ -28,6 +28,7 @@ jobs:
         with:
           black: true
           flake8: true
+          pylint: false
 
       - name: Run Dockerfile linter
         uses: hadolint/hadolint-action@v3.1.0
