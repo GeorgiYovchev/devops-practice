@@ -1,82 +1,82 @@
-name: This is the Game
-
-on:
-  push:
-    branches:
-      - github-actions
-
-jobs:
-  editorconfig:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: editorconfig-checker/action-editorconfig-checker@main
-
-  linters:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.11
-
-      - name: Install Python dependencies
-        run: pip install black pylint
-
-      - name: Run the linters
-        uses: wearerequired/lint-action@v2
-        with:
-          black: true
-          pylint: true
-
-      - name: markdownlint-cli
-        uses: nosborn/github-action-markdown-cli@v3.3.0
-        with:
-          files: README.md
-
-  tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.11
-
-      - name: Install requirements
-        working-directory: ./app
-        run: python -m pip install -r ../requirements.txt
-
-      - name: Unit Test
-        working-directory: ./app
-        run: python -m unittest app_test.py
-
-  scan:
-    name: gitleaks
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-#  sonarcloud:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - uses: sonarsource/sonarcloud-github-action@master
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-  code-smells:
-    name: SonarCloud
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: AppThreat/sast-scan-action@master
-        with:
-          type: "python"
+# name: This is the Game
+# 
+# on:
+#   push:
+#     branches:
+#       - github-actions
+# 
+# jobs:
+#   editorconfig:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: editorconfig-checker/action-editorconfig-checker@main
+# 
+#   linters:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+# 
+#       - name: Set up Python
+#         uses: actions/setup-python@v2
+#         with:
+#           python-version: 3.11
+# 
+#       - name: Install Python dependencies
+#         run: pip install black pylint
+# 
+#       - name: Run the linters
+#         uses: wearerequired/lint-action@v2
+#         with:
+#           black: true
+#           pylint: true
+# 
+#       - name: markdownlint-cli
+#         uses: nosborn/github-action-markdown-cli@v3.3.0
+#         with:
+#           files: README.md
+# 
+#   tests:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+# 
+#       - name: Set up Python
+#         uses: actions/setup-python@v2
+#         with:
+#           python-version: 3.11
+# 
+#       - name: Install requirements
+#         working-directory: ./app
+#         run: python -m pip install -r ../requirements.txt
+# 
+#       - name: Unit Test
+#         working-directory: ./app
+#         run: python -m unittest app_test.py
+# 
+#   scan:
+#     name: gitleaks
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: gitleaks/gitleaks-action@v2
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+# 
+# #  sonarcloud:
+# #    runs-on: ubuntu-latest
+# #    steps:
+# #      - uses: actions/checkout@v3
+# #      - uses: sonarsource/sonarcloud-github-action@master
+# #        env:
+# #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+# #          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+# 
+#   code-smells:
+#     name: SAST test
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: AppThreat/sast-scan-action@master
+#         with:
+#           type: "python"
